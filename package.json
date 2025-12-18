@@ -8,6 +8,24 @@
   "jsnext:main": "lib/index.esm.js",
   "browser": "lib/index.umd.js",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.cjs.js",
+      "browser": "./lib/index.umd.js"
+    },
+    "./validator": {
+      "types": "./lib/validator/index.d.ts",
+      "import": "./lib/validator/index.esm.js",
+      "require": "./lib/validator/index.cjs.js"
+    },
+    "./func": {
+      "types": "./lib/func/index.d.ts",
+      "import": "./lib/func/index.esm.js",
+      "require": "./lib/func/index.cjs.js"
+    }
+  },
   "files": [
     "lib"
   ],
@@ -58,6 +76,7 @@
     "prettier": "^2.8.1",
     "rollup": "^3.7.2",
     "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-visualizer": "^6.0.5",
     "ts-jest": "^29.0.3",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4"

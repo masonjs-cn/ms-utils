@@ -6,6 +6,14 @@ describe('random: ', () => {
     it(`/^#[0-9a-fA-F]{6}$/.test(randomColor()) should return true`, () => {
       expect(/^#[0-9a-fA-F]{6}$/.test(randomColor())).toBeTruthy()
     })
+
+    // 边界情况：多次调用应该返回不同的值（概率测试）
+    it('randomColor should return different values on multiple calls', () => {
+      const colors = Array.from({ length: 10 }, () => randomColor())
+      const uniqueColors = new Set(colors)
+      // 虽然理论上可能相同，但10次调用相同的概率极低
+      expect(uniqueColors.size).toBeGreaterThan(1)
+    })
   })
 
   describe('randomNum: ', () => {
@@ -13,6 +21,40 @@ describe('random: ', () => {
       const received = randomNum(1, 10)
       expect(received).toBeGreaterThanOrEqual(1)
       expect(received).toBeLessThanOrEqual(10)
+    })
+
+    // 边界情况：相同的最小值和最大值
+    it('randomNum should handle same min and max', () => {
+      expect(randomNum(5, 5)).toBe(5)
+    })
+
+    // 边界情况：负数范围
+    it('randomNum should handle negative numbers', () => {
+      const received = randomNum(-10, -1)
+      expect(received).toBeGreaterThanOrEqual(-10)
+      expect(received).toBeLessThanOrEqual(-1)
+    })
+
+    // 边界情况：包含0的范围
+    it('randomNum should handle range including zero', () => {
+      const received = randomNum(-5, 5)
+      expect(received).toBeGreaterThanOrEqual(-5)
+      expect(received).toBeLessThanOrEqual(5)
+    })
+
+    // 错误情况：无效参数
+    it('randomNum should throw error for invalid min parameter', () => {
+      expect(() => randomNum(NaN, 10)).toThrow(TypeError)
+      expect(() => randomNum('invalid' as any, 10)).toThrow(TypeError)
+    })
+
+    it('randomNum should throw error for invalid max parameter', () => {
+      expect(() => randomNum(1, NaN)).toThrow(TypeError)
+      expect(() => randomNum(1, 'invalid' as any)).toThrow(TypeError)
+    })
+
+    it('randomNum should throw error when min > max', () => {
+      expect(() => randomNum(10, 1)).toThrow(Error)
     })
   })
 

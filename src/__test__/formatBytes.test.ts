@@ -12,4 +12,16 @@ describe('formatBytes', () => {
   it('123456789', () => {
     expect(formatBytes(123456789)).toEqual('117.74 MB')
   })
+
+  it('should throw error for negative numbers', () => {
+    expect(() => formatBytes(-1)).toThrow('Bytes must be a non-negative number')
+  })
+
+  it('should throw error for NaN', () => {
+    expect(() => formatBytes(NaN)).toThrow('Bytes must be a valid number')
+  })
+
+  it('should throw error for invalid type', () => {
+    expect(() => formatBytes('invalid' as any)).toThrow('Bytes must be a valid number')
+  })
 })

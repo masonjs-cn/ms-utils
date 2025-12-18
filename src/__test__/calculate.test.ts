@@ -77,6 +77,11 @@ describe('calculate functions: ', () => {
     it('divide should handle decimal results', () => {
       expect(divide(1, 3)).toBeCloseTo(0.3333333333333333, 15)
     })
+
+    it('divide should throw error for division by zero', () => {
+      expect(() => divide(10, 0)).toThrow('Division by zero is not allowed')
+      expect(() => divide(1, 0)).toThrow('Division by zero is not allowed')
+    })
   })
 
   describe('round: ', () => {
@@ -93,6 +98,20 @@ describe('calculate functions: ', () => {
     it('round should handle zero decimal places', () => {
       expect(round(1.5, 0)).toBe(2)
       expect(round(1.4, 0)).toBe(1)
+    })
+
+    it('round should throw error for invalid decimal parameter', () => {
+      expect(() => round(1.23, 1.5)).toThrow('Decimal parameter must be an integer')
+      expect(() => round(1.23, NaN)).toThrow('Decimal parameter must be an integer')
+    })
+  })
+
+  describe('createOperation error handling: ', () => {
+    it('should throw error when no arguments provided', () => {
+      expect(() => plus()).toThrow('At least one number is required')
+      expect(() => minus()).toThrow('At least one number is required')
+      expect(() => times()).toThrow('At least one number is required')
+      expect(() => divide()).toThrow('At least one number is required')
     })
   })
 })
