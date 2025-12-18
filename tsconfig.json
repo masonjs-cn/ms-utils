@@ -13,6 +13,6 @@
     "strict": true, /* 启用严格模式 */
     "types": ["node", "jest"],
   },
-  "include": ["src/index.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "lib"]
 }

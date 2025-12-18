@@ -7,7 +7,7 @@ const arrayEqual = (arr1: any[], arr2: any[]): boolean => {
   let i = 0
   const len = arr1.length
 
-  while (i < len - 1) {
+  while (i < len) {
     if (arr1[i] !== arr2[i]) return false
     i++
   }

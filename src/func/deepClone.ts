@@ -12,7 +12,7 @@ export const deepClone = <T>(tSource: Record<string, any> | T, cache = new WeakM
 
   for (const key in tSource) {
     if (Object.prototype.hasOwnProperty.call(tSource, key)) {
-      if (typeof tSource[key] === 'object' && typeof tSource[key] !== null) {
+      if (typeof tSource[key] === 'object' && tSource[key] !== null) {
         res[key] = deepClone(tSource[key], cache)
       } else {
         res[key] = tSource[key]
